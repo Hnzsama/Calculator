@@ -1,0 +1,167 @@
+<!-- Belajar JavaScript -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/564/564429.png">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #4e4b4b;
+      }
+
+        .calculator {
+        background-color: #050505;
+        width: fit-content;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      input {
+        padding-right: 10px;
+        width: 525px;
+        height: 70px;
+        font-size: 30px;
+        margin-bottom: 10px;
+        text-align: right;
+        border-radius: 10px;
+        background-color: #fffdfd;
+      }
+
+      button {
+        width: 150px;
+        height: 100px;
+        font-size: 29px;
+        margin: 5px 0;
+        background-color: #000000;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        color: white;
+      }
+
+      button:hover {
+        background-color: #2d2c2c;
+      }
+
+      .hidden {
+        display: none; 
+        background: transparent;
+        width: 131.25px;
+      }
+        
+      .e{
+        background-color: orangered;
+        width: 75px;
+        border-radius: 15px;
+      }
+        
+      .e:hover{
+        background-color:rgba(255, 72, 6, 0.874)
+      }
+
+      .sp{
+        background: transparent;
+        border: none;
+      }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display">
+        <div class="button">
+          <button style="height: 80px;;width: 150px;" class="e" onclick="clearDisplay()">C</button> 
+          <button style="height: 80px;;width: 150px;" class="e" id="show" onclick="showButtons()">▼</button>
+          <span style="padding-left: 154px;">
+          <button style="height: 80px;border-radius: 50px;" class="e" id="a" onclick="backspace()">←</button> 
+          </span>
+          <br>
+            <button class="hidden" id="sqrt" onclick="Kuadrat('Math.sqrt')">√</button> 
+            <button class="hidden" id="cbrt" onclick="Kuadrat('Math.cbrt')">∛</button>
+            <button class="hidden" id="kurungb" onclick="Operator('(')">(</button>
+            <button class="hidden" id="kurungt" onclick="Operator(')')">)</button>
+          <br>
+          <button onclick="Angka('9')">9</button>
+          <button onclick="Angka('8')">8</button>
+          <button onclick="Angka('7')">7</button>
+          <button class="e" onclick="Operator('+')">+</button>
+          <br>
+            <button onclick="Angka('6')">6</button>
+            <button onclick="Angka('5')">5</button>
+            <button onclick="Angka('4')">4</button>
+            <button class="e" onclick="Operator('-')">-</button>
+            <br>
+            <button onclick="Angka('3')">3</button>
+            <button onclick="Angka('2')">2</button>
+            <button onclick="Angka('1')">1</button>
+            <button class="e" onclick="Operator('*')">*</button>
+            <br>
+            <button onclick="Angka('.')">.</button> 
+            <button onclick="Angka('0')">0</button>
+            <button onclick="Hasil()">=</button>
+            <button class="e" onclick="Operator('/')">/</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        
+        
+        function Angka(number) {
+          display.value += number;
+        }
+        function Operator(operator) {
+          display.value += operator;
+        }
+        function Kuadrat(y) {
+          display.value += y + '(';
+        }
+
+        
+        function clearDisplay() {
+          display.value = '';
+        }
+        function Hasil() {
+          try {
+            display.value = eval(display.value);
+          } catch (error) {
+            display.value = 'Error';
+          }
+        }
+        function backspace() {
+          display.value = display.value.slice(0, -1);
+        }
+        function showButtons() {
+          var sqrt = document.getElementById('sqrt');
+          var cbrt = document.getElementById('cbrt');
+          var kt = document.getElementById('kurungb');
+          var kb = document.getElementById('kurungt');
+          var button = document.getElementById('show');
+          if (sqrt.style.display === "none" && button.innerHTML === "▼") {
+            button.innerHTML = "▲";
+            sqrt.style.display = "inline-block";
+            cbrt.style.display = "inline-block";
+            kb.style.display = "inline-block";
+            kt.style.display = "inline-block";
+          } else {
+            sqrt.style.display = "none";
+            cbrt.style.display = "none";
+            kb.style.display = "none";
+            kt.style.display = "none";
+            button.innerHTML = "▼";
+          }
+        }
+    </script>
+</body>
+</html>
+
